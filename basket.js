@@ -7,27 +7,35 @@ const EventEmitter = events.EventEmitter;
 const match = new EventEmitter();
 
 // Le nombre de paniers
-let nbPoints = 0;
+let recap = {
+    doranco: 0,
+    lakers: 0
+};
 
 // Lors d'un ajout de points => le nombre de points augmente
-match.addListener('newPoint', (points, team, callback) => {
+match.addListener('newPoint', (points, team, last = false) => {
     setTimeout(() => {
-        console.log('Panier à ' + points + ' points');
-        console.log('Panier de l\'équipe ' + team);
-        console.log('Un panier a été détecté !');
-        nbPoints++;
-        console.log('Total des points : ' + nbPoints);
-        // Execution de la callback
-        callback()
+        // On ajoute les points à l'équipe concernée
+        recap[team] += points;
+
+        // Si c'est le dernier panier, on affiche un récap
+        if (last) {
+            // Tant qu'on a des jetons c'est pas fini
+            Object.keys(recap).forEach(team => console.log(`${team} : ${recap[team]} points `));
+        }
     } ,100);
 });
+
+match.once('end', () => console.log('match terminé !'));
 
 /********************************/
 /***** DEBUT DU MATCH ****/
 /********************************/
 
-console.log('Début du match (points : ' + nbPoints + ')');
-match.emit('newPoint', 2, 'Doranco', () => {
-    console.log('Fin du match (points : ' + nbPoints + ')');
-});
+console.log('Début du match');
+match.emit('newPoint', 2, 'doranco'); // 1s
+match.emit('newPoint', 3, 'doranco'); // 5s
+match.emit('newPoint', 2, 'lakers'); // 10s
+match.emit('newPoint', 1, 'doranco', true); // 2s
 
+match.emit('end');
