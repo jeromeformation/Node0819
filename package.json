@@ -1,0 +1,25 @@
+{
+  "name": "workspace-node",
+  "version": "0.0.0",
+  "description": "Semaine NodeJS - ExpressJS - MongoDB",
+  "main": "server-express.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^2.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "SET NODE_ENV = production && nodemon server-express.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeromeformation/Node0819.git"
+  },
+  "author": "Jerome",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeromeformation/Node0819/issues"
+  },
+  "homepage": "https://github.com/jeromeformation/Node0819#readme"
+}
