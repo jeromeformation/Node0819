@@ -23,7 +23,6 @@ function render(res, filename) {
 
 }
 
-
 // Création du serveur web
 const server = http.createServer();
 
@@ -50,6 +49,9 @@ server.on('request',(req, res) => {
 
         res.end('<h1>Page 404 : Not Found !</h1>');
     }
+
+    // Renvoi de la réponse au navigateur
+    //res.end();
 });
 
 // Une fois que le serveur est en écoute, on affiche un message
