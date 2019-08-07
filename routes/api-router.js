@@ -3,9 +3,10 @@ const express = require('express');
 const router = express.Router();
 
 // Page d'accueil
-router.put('/produit/edit', (req, res) => {
+router.all('/produit/edit', (req, res) => {
     // Récupération des variables POST
     const datas = req.body;
+    console.log(req);
     console.log(datas);
 
     res.json({

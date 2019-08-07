@@ -14,11 +14,18 @@ const apiRouter = require(__dirname + '/routes/api-router.js');
 app.set('view engine', 'pug');
 
 // Les middlewares
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(methodOverride('_method'));
+app.use(methodOverride(function (req, res) {
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+        // look in urlencoded POST bodies and delete it
+        var method = req.body._method;
+        delete req.body._method;
+        return method
+    }
+}));
 
-app.use(express.static('public'));
 
 // Routage
 app.use('/', indexRouter);
