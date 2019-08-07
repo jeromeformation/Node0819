@@ -8,4 +8,14 @@ module.exports = (io) => {
  */
 function connection(socket) {
     console.log('Un nouveau client se connecte');
+
+    socket.on('nouveau-message', newMessage);
+}
+
+/**
+ * Nouveau message reçu
+ * @param objet
+ */
+function newMessage(objet) {
+    console.log('Nouveau message reçu : ' + objet.message);
 }

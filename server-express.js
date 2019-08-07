@@ -44,8 +44,9 @@ app.use('/', indexRouter);
 app.use('/api/products', apiRouter);
 app.use('/tchat', tchatRouter);
 
-// Lancement du serveur
+// Création du serveur HTTP
 const server = http.createServer(app);
+// Lancement du serveur sur le port 3000
 server.listen(3000, () => console.log("Serveur web lancé sur http://localhost:3000"));
 // SocketIO écoute le serveur
 io.listen(server);
