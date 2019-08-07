@@ -9,6 +9,7 @@ const methodOverride = require('method-override');
 // On récupère nos routes
 const indexRouter = require(__dirname + '/routes/index-router.js');
 const apiRouter = require(__dirname + '/routes/api-router.js');
+const tchatRouter = require(__dirname + '/routes/tchat-router.js');
 
 // Initialisation du moteur de templates
 app.set('view engine', 'pug');
@@ -29,7 +30,8 @@ app.use(methodOverride(function (req, res) {
 
 // Routage
 app.use('/', indexRouter);
-app.use('/api', apiRouter);
+app.use('/api/products', apiRouter);
+app.use('/tchat', tchatRouter);
 
 // Lancement du serveur
 app.listen(3000, () => console.log("Serveur web lancé sur http://localhost:3000"));
