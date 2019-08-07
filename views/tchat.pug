@@ -6,6 +6,11 @@ block title
 block body
     p= "Bienvenue sur le tchat"
 
+    form.form-signin
+        h1.h3.mb-3.font-weight-normal Connexion au tchat
+        input#username.form-control(type='text', placeholder='username', required='', autofocus='')
+        button.btn.btn-lg.btn-primary.btn-block Connexion
+
 block append javascripts
     script(src="/socketio/socket.io.dev.js")
     script(src="/js/tchat-client.js")
