@@ -4,12 +4,22 @@ block title
     | Tchat
 
 block body
-    p= "Bienvenue sur le tchat"
+    h1.text-center= "Bienvenue sur le tchat"
 
-    form.form-signin
+    form.form-signin#tchatConnection
         h1.h3.mb-3.font-weight-normal Connexion au tchat
         input#username.form-control(type='text', placeholder='username', required='', autofocus='')
         button.btn.btn-lg.btn-primary.btn-block Connexion
+
+    .messaging#tchat
+        .inbox_msg
+            .mesgs
+                //- Les messages apparaitront ici
+                .type_msg
+                    .input_msg_write
+                        input.write_msg(type='text', placeholder='Type a message')
+                        button.msg_send_btn(type='button')
+                            i.fa.fa-paper-plane-o(aria-hidden='true')
 
 block append javascripts
     script(src="/socketio/socket.io.dev.js")

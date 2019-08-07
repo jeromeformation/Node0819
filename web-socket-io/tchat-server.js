@@ -8,8 +8,20 @@ module.exports = (io) => {
  */
 function connection(socket) {
     console.log('Un nouveau client se connecte');
-    socket.on('nouveau-message', (data) => {
-        newMessage(data, socket);
+    socket.on('tchatConnection', (data) => {
+        tchatConnection(data, socket);
+    });
+}
+// On stocke tous les clients CONNECTES dans le tableau
+// todo: gérer la suppression de la clef lors d'une déconnexion
+let clients = [];
+
+function tchatConnection(data, socket) {
+    // On stocke le client
+    clients[socket.id] = data.username;
+    // On envoie les derniers messages pour initialiser le tchat
+    socket.emit('initTchat', {
+        messages: []
     });
 }
 
