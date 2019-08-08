@@ -39,6 +39,8 @@ $(function(){
         $('#tchatConnection').fadeOut(() => tchat.fadeIn());
         // On prépare l'envoi du message au serveur
         $('.msg_send_btn').on('click', sendMessage);
+        // On écoute le réception des messages
+        socket.on('broadcast-message', displayNewMessage);
     }
 
     /**
@@ -49,7 +51,7 @@ $(function(){
         // Récupération de la valeur du message
         const input = $('.write_msg');
         const message = input.val();
-        // On vide l'input pour l'envoi du prochaine message
+        // On vide l'input pour l'envoi du prochain message
         input.val('');
         // Emission d'un nouvel événement : "nouveau-message"
         // On envoie un objet qui contient le message et le nom d'utilisateur
@@ -57,5 +59,25 @@ $(function(){
             message: message,
             username: username
         });
+    }
+
+    /**
+     * Affiche le message reçu dans le tchat
+     */
+    function displayNewMessage(datas) {
+        const container = $('.msg_history');
+        container.append(`
+        <div class="incoming_msg">
+            <div class="incoming_msg_img">
+                <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" />
+            </div>
+            <div class="received_msg">
+                <div class="received_withd_msg">
+                    <span class="time_date">${datas.username}</span>
+                    <p>${datas.message}</p>
+                </div>
+            </div>
+        </div>
+        `);
     }
 });
