@@ -1,6 +1,10 @@
+let allSockets;
+
 module.exports = (io) => {
-  // Un client se connecte
-  io.on('connection', connection);
+    // On rend disponible socket.io aux autres fonctions
+    allSockets = io;
+    // Un client se connecte
+    allSockets.on('connection', connection);
 };
 
 /**
@@ -23,15 +27,16 @@ function tchatConnection(data, socket) {
     socket.emit('initTchat', {
         messages: []
     });
+    // On écoute l'envoi du message
+    socket.on('nouveau-message', newMessage);
 }
 
 /**
  * Nouveau message reçu
  * @param objet
- * @param socket
  */
-function newMessage(objet, socket) {
-    console.log('Nouveau message reçu : ' + objet.message);
-    // On envoie un message de confirmation au navigateur
-    socket.emit('confirm', {status: 'ok'});
+function newMessage(objet) {
+    console.log('Nouveau message reçu : ', objet);
+    // On diffuse le message à tous les utilisateurs
+    allSockets.emit('broadcast-message', objet);
 }

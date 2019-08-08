@@ -11,13 +11,13 @@ block body
         input#username.form-control(type='text', placeholder='username', required='', autofocus='')
         button.btn.btn-lg.btn-primary.btn-block Connexion
 
-    .messaging#tchat
+    .messaging#tchat.container-perso
         .inbox_msg
             .mesgs
                 //- Les messages apparaitront ici
                 .type_msg
                     .input_msg_write
-                        input.write_msg(type='text', placeholder='Type a message')
+                        input.write_msg(type='text', placeholder='Message')
                         button.msg_send_btn(type='button')
                             i.fa.fa-paper-plane-o(aria-hidden='true')
 
